@@ -1,0 +1,13 @@
+Infinitiv-B, Präsen?-e, Präteritum?-r, Perfekt?-g
+gewinnen-B,gewinnt-E,gewann-R,hat...gewonnen-G
+essen-B,isst-E,aß-R,hat...gegessen-G
+denken-b,denkt-e,dachte-r,hat...gedacht-g
+brennen-b,brennt-e,brannte-r,hat...gebrannt-g
+heißen-b,heißt-e,hieß-r,hat...geheißen-g
+fallen-b,fällt-e,fiel-r,ist...gefallen-g
+heben-b,hebt-e,hob-r,hat...gehoben-g
+fliegen-b,fliegt-e,flog-r,ist...geflogen-g
+reißen-b,reißt-e,riss-r,hat...gerissen-g
+fressen-b,frisst-e,fraß-r,hat...gefressen-g
+bringen-b,bringt-e,brachte-r,hat...gebracht-g
+fließen-b,fließt-e,floss,ist...geflossen-g

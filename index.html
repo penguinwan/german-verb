@@ -1,0 +1,136 @@
+<html>
+<head>
+<title>German Verb</title>
+<style>
+input[type="button"] {
+	background-color: #DAF7A6;
+	width: 150px;
+	height: 40px;
+	font-size: 16px;
+}
+input[type="text"] {
+	font-size: 16px;
+}
+label {
+	font-size: 24px;
+}
+.text {
+	font-size: 120px;
+	vertical-align: center;
+	horizontal-align: center;
+	font-family: 'Comic Sans MS';
+}
+.odd {
+	background-color: #DEDEDE;
+}
+.even {
+	background-color: white;
+}
+</style>
+</head>
+<body>
+	<table width="80%">
+		<tr><td>
+			<label>1. Choose a Dictionary File: </label><input type="file" id="fileinput"/>
+		</td></tr>
+		<tr><td>
+			<input type="button" onclick="shuffle(map());start()" value="Start" width="100"/>&nbsp;
+			<input type="button" onclick="next()" value="Next" width="100"/>
+		</td></tr>
+		<tr><td>
+			<label id="question" class="text"></label>
+		</td></tr>
+	</table>
+
+	<script>
+		var lines;
+		var questions = [];
+		var currentRow = 0;
+		var currentColumn = 0;
+		document.getElementById('fileinput').onchange = function() {
+			var file = this.files[0];
+
+			var reader = new FileReader();
+			reader.onload = function(progressEvent) {
+				// By lines
+				lines = this.result.split('\n');
+			};
+			reader.readAsText(file);
+		}
+		function shuffle(array) {
+			var currentValue = array.length, temporaryValue, randomIndex;
+
+			// While there remain elements to shuffle...
+			while (0 !== currentValue) {
+
+				// Pick a remaining element...
+				randomIndex = Math.floor(Math.random() * currentValue);
+				currentValue -= 1;
+
+				// And swap it with the current element.
+				temporaryValue = array[currentValue];
+				array[currentValue] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			}
+
+			questions = array;
+			console.log(questions);
+		}
+		function map() {
+			var array = [];
+			var heads = lines[0].split(',');
+			for(var i=1 ; i<lines.length ; i++) {
+				var columns = [];
+				lines[i].split(',').forEach((column, index) => {
+					if(index != 0) {
+						columns.push(heads[index]);						
+					}
+					columns.push(column);
+				})
+				array.push(columns);
+			}
+			return array;
+		}
+
+		function start() {
+			setElement(questions[currentRow][currentColumn]);
+		}
+
+		function next() {
+			if(currentColumn < questions[currentRow].length - 1) {
+				currentColumn++;
+				setElement(questions[currentRow][currentColumn])
+			} else {
+				currentColumn = 0;
+
+				if(currentRow < questions.length - 1) {
+					currentRow++;
+					setElement(questions[currentRow][currentColumn]);
+				} else {
+					currentRow = 0;
+					document.getElementById('question').innerHTML = "DONE";
+				}
+			}
+		}
+		function setElement(value) {
+			var textAndColor = value.split('-');
+			document.getElementById('question').innerHTML = textAndColor[0];
+			document.getElementById('question').style.color = translateColor(textAndColor[1]);
+		}
+		function translateColor(value) {
+			if(value === 'B' || value === 'b') {
+				return "black";
+			}
+			if(value === 'E' || value === 'e') {
+				return "blue";
+			}
+			if(value === 'R' || value === 'r') {
+				return "red";
+			}
+			if(value === 'G' || value === 'g') {
+				return "green";
+			}
+		}
+	</script>
+</body>
+</html>
